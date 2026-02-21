@@ -1,0 +1,358 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+/* ── RESET & VARIABLES ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg:        #f5f0e8;
+  --card:      #ffffff;
+  --ink:       #1a1a2e;
+  --ink-soft:  #4a4a6a;
+  --ink-muted: #9090b0;
+  --accent:    #2d5be3;
+  --accent-lt: #edf0fd;
+  --accent-glow: rgba(45, 91, 227, 0.18);
+  --gold:      #c9973a;
+  --border:    rgba(26, 26, 46, 0.09);
+  --shadow-sm: 0 2px 8px rgba(26,26,46,0.06);
+  --shadow-md: 0 8px 32px rgba(26,26,46,0.10);
+  --shadow-lg: 0 24px 60px rgba(26,26,46,0.13);
+  --radius:    20px;
+  --radius-sm: 12px;
+  --font-head: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', sans-serif;
+  --transition: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── BODY & BACKGROUND ── */
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(ellipse 80% 60% at 20% -10%, rgba(45,91,227,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 110%, rgba(201,151,58,0.08) 0%, transparent 55%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  gap: 0;
+}
+
+/* ── CONTAINER (heading block) ── */
+.container {
+  width: 100%;
+  max-width: 460px;
+  text-align: center;
+  margin-bottom: 0;
+  animation: riseIn 0.55s ease both;
+}
+
+.container h1 {
+  font-family: var(--font-head);
+  font-size: 2.05rem;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  position: relative;
+  display: inline-block;
+}
+
+/* decorative underline accent on h1 */
+.container h1::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--gold));
+  border-radius: 2px;
+  margin: 0.45rem auto 0;
+  transition: width var(--transition);
+}
+.container h1:hover::after {
+  width: 90px;
+}
+
+/* ── CARD WRAPPER — wraps amount + dropdown + message + button ── */
+/* We'll use a clever CSS trick: target the siblings after .container */
+body > .amount,
+body > .dropdown,
+body > .message,
+body > .btn {
+  width: 100%;
+  max-width: 460px;
+}
+
+/* Visually group everything into one card using a pseudo-card approach */
+body > .amount {
+  background: var(--card);
+  border-radius: var(--radius) var(--radius) 0 0;
+  border: 1px solid var(--border);
+  border-bottom: none;
+  padding: 2rem 2rem 1.4rem;
+  margin-top: 1.8rem;
+  box-shadow: var(--shadow-md);
+  animation: riseIn 0.55s 0.08s ease both;
+}
+
+body > .dropdown {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-top: 1px solid rgba(26,26,46,0.05);
+  border-bottom: none;
+  padding: 0 2rem 1.4rem;
+  box-shadow: 0 0 0 rgba(0,0,0,0);
+  animation: riseIn 0.55s 0.14s ease both;
+}
+
+body > .message {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-top: 1px solid rgba(26,26,46,0.05);
+  border-bottom: none;
+  padding: 0.9rem 2rem;
+  animation: riseIn 0.55s 0.2s ease both;
+}
+
+body > .btn {
+  border-radius: 0 0 var(--radius) var(--radius);
+  /* button styles below */
+}
+
+/* ── AMOUNT SECTION ── */
+.amount p {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink-muted);
+  margin-bottom: 0.65rem;
+}
+
+.amount input {
+  width: 100%;
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem 1.1rem;
+  font-family: var(--font-body);
+  font-size: 1.45rem;
+  font-weight: 500;
+  color: var(--ink);
+  outline: none;
+  transition:
+    border-color var(--transition),
+    box-shadow var(--transition),
+    background var(--transition);
+  letter-spacing: -0.01em;
+}
+
+.amount input::placeholder {
+  color: var(--ink-muted);
+  font-weight: 300;
+  font-size: 1.2rem;
+}
+
+.amount input:focus {
+  border-color: var(--accent);
+  background: #fff;
+  box-shadow: 0 0 0 4px var(--accent-glow);
+}
+
+/* ── DROPDOWN SECTION ── */
+.dropdown {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+
+/* swap icon */
+.dropdown .fa-solid {
+  color: var(--accent);
+  font-size: 1rem;
+  flex-shrink: 0;
+  background: var(--accent-lt);
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition), background var(--transition);
+  cursor: pointer;
+  border: 1px solid rgba(45,91,227,0.15);
+}
+
+.dropdown .fa-solid:hover {
+  transform: rotate(180deg);
+  background: var(--accent);
+  color: #fff;
+}
+
+/* Currency blocks */
+.fromCurrency,
+.toCurrency {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 0.75rem;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.fromCurrency:focus-within,
+.toCurrency:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-glow);
+}
+
+/* Flag image */
+.fromCurrency img,
+.toCurrency img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 2px solid rgba(255,255,255,0.9);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+}
+
+/* Select */
+.fromCurrency select,
+.toCurrency select {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink);
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239090b0' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0px center;
+  padding-right: 16px;
+  letter-spacing: 0.03em;
+}
+
+.fromCurrency select:focus,
+.toCurrency select:focus {
+  color: var(--accent);
+}
+
+/* ── MESSAGE ── */
+.message {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+  text-align: center;
+  letter-spacing: 0.02em;
+  position: relative;
+}
+
+/* subtle separator lines on message */
+.message::before,
+.message::after {
+  content: '—';
+  margin: 0 0.5rem;
+  color: var(--ink-muted);
+  font-weight: 300;
+}
+
+/* ── EXCHANGE BUTTON ── */
+.btn {
+  display: block;
+  width: 100%;
+  max-width: 460px;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, var(--accent) 0%, #1a40b8 100%);
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 0 0 var(--radius) var(--radius);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition:
+    opacity var(--transition),
+    transform var(--transition),
+    box-shadow var(--transition);
+  box-shadow: var(--shadow-md), 0 4px 20px rgba(45,91,227,0.3);
+  animation: riseIn 0.55s 0.26s ease both;
+}
+
+/* shimmer sweep on button */
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    transparent 30%,
+    rgba(255,255,255,0.18) 50%,
+    transparent 70%
+  );
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+
+.btn:hover::before {
+  transform: translateX(100%);
+}
+
+.btn:hover {
+  opacity: 0.93;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg), 0 8px 30px rgba(45,91,227,0.4);
+}
+
+.btn:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ── ANIMATIONS ── */
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 520px) {
+  .container h1 { font-size: 1.6rem; }
+  body > .amount { padding: 1.5rem 1.3rem 1.1rem; }
+  body > .dropdown { padding: 0 1.3rem 1.2rem; gap: 0.55rem; }
+  body > .message  { padding: 0.8rem 1.3rem; }
+  .btn { padding: 0.9rem 1.3rem; }
+}
