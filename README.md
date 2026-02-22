@@ -8,6 +8,9 @@ Simple and responsive currency converter built with vanilla JavaScript, powered 
 ## Overview
 This project provides a clean interface for converting one currency to another in real time. Users can enter an amount, choose source and target currencies, and get an updated conversion result using live exchange rate data.
 
+## Project Description
+This project was built to practice core frontend development concepts using plain JavaScript and real API integration. It demonstrates DOM manipulation, asynchronous data fetching, event handling, and basic error management in a practical, user-facing tool.
+
 ## Features
 - Live currency conversion using external exchange-rate API data
 - Dynamic currency dropdowns populated from a currency-country mapping
@@ -58,3 +61,5 @@ No build tools or package installation are required.
 - Add historical rates and trend visualization
 - Add unit and integration tests
 
+## License
+No license is currently specified for this repository.
