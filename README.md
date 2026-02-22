@@ -58,5 +58,3 @@ No build tools or package installation are required.
 - Add historical rates and trend visualization
 - Add unit and integration tests
 
-## License
-No license is currently specified for this repository.
